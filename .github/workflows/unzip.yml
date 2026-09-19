@@ -16,10 +16,10 @@ jobs:
 
       - name: Buka ZIP
         run: |
-          unzip -o ari-digital-editor-data-v2.zip -d extracted
+          unzip -o ari-digital-template-01-slot-foto-v6.zip -d extracted
           cp -r extracted/* .
           rm -rf extracted
-          rm ari-digital-editor-data-v2.zip
+          rm ari-digital-template-01-slot-foto-v6.zip
 
       - name: Simpan hasil
         run: |
