@@ -15,9 +15,18 @@ function slugify(v){
   return String(v||"undangan").toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,55) || "undangan";
 }
 function cleanData(d={}){
-  const keys=["bride","groom","guest","date","time","venue","address","maps","bridePhoto","groomPhoto"];
+  const keys=[
+    "bride","groom","guest","coverTitle","brideParents","groomParents","date","time","venue","address","maps","bridePhoto","groomPhoto",
+    "storyIntro","story1Date","story1Title","story1Text","story1Photo","story2Date","story2Title","story2Text","story2Photo",
+    "story3Date","story3Title","story3Text","story3Photo","story4Date","story4Title","story4Text","story4Photo",
+    "story5Date","story5Title","story5Text","story5Photo","gallery1","gallery2","gallery3"
+  ];
+  const longKeys=new Set(["storyIntro","story1Text","story2Text","story3Text","story4Text","story5Text"]);
   const out={};
-  for(const k of keys) out[k]=typeof d[k]==="string"?d[k].slice(0,1000):"";
+  for(const k of keys){
+    const max=longKeys.has(k)?5000:1500;
+    out[k]=typeof d[k]==="string"?d[k].slice(0,max):"";
+  }
   return out;
 }
 

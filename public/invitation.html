@@ -3,14 +3,25 @@
 <body><div class="public-invite"><div class="public-head">Ari Digital</div><iframe id="invite" src="templates/template-01/index.html"></iframe></div>
 <script>
 (async()=>{
+ const iframe=document.getElementById('invite');
  const slug=new URLSearchParams(location.search).get('slug');
  if(!slug){document.title='Undangan tidak ditemukan — Ari Digital';return}
+ let payload=null;
+ const send=()=>{
+   if(payload && iframe.contentWindow){
+     iframe.contentWindow.postMessage({type:'ARI_INVITATION_DATA',data:payload},'*');
+     // Retry once after the template has finished its own scripts.
+     setTimeout(()=>iframe.contentWindow.postMessage({type:'ARI_INVITATION_DATA',data:payload},'*'),250);
+   }
+ };
+ iframe.addEventListener('load',send);
  try{
    const r=await fetch('/api/invitations?slug='+encodeURIComponent(slug));
    if(!r.ok) throw new Error('not found');
    const j=await r.json();
-   document.title=(j.data.bride||'')+' & '+(j.data.groom||'')+' — Ari Digital';
-   document.getElementById('invite').onload=()=>document.getElementById('invite').contentWindow.postMessage({type:'ARI_INVITATION_DATA',data:j.data||{}},'*');
+   payload=j.data||{};
+   document.title=(payload.bride||'')+' & '+(payload.groom||'')+' — Ari Digital';
+   send();
  }catch(e){document.body.innerHTML='<main style="padding:40px;font-family:system-ui;text-align:center"><h1>Undangan tidak ditemukan</h1><p>Link mungkin salah atau belum tersimpan.</p></main>'}
 })();
 </script></body></html>

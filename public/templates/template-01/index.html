@@ -228,19 +228,24 @@ document.addEventListener('DOMContentLoaded',function(){
 }
 </style>
 </head>
+<style id="ari-dynamic-data-style">
+.dynamic-couple-name{position:absolute;left:10%;right:10%;top:55%;z-index:9;text-align:center;color:#f7e6c8;text-shadow:0 2px 10px #000;font:600 25px/1.25 Georgia,serif;letter-spacing:.5px;pointer-events:none}
+@media(max-width:480px){.dynamic-couple-name{font-size:22px}}
+.dynamic-cover-title{position:absolute;left:0;right:0;top:31%;text-align:center;font:600 14px/1.3 Arial,sans-serif;letter-spacing:4px;text-transform:uppercase;color:#f7e7c8;text-shadow:0 2px 12px rgba(0,0,0,.5);pointer-events:none}.dynamic-couple-name{z-index:2}.story-entry img.story-photo{transition:opacity .4s ease}.gallery img{transition:opacity .4s ease,transform 1s cubic-bezier(.2,.8,.2,1),filter .9s ease}
+</style>
 <body class="locked">
 <div class="wrap">
 
 <section class="cover cover-photo" id="coverGate">
-  <img class="cover-image" src="cover-baru.webp" alt="Wedding of Faisal & Dian" fetchpriority="high">
-  <div class="guest-cover" id="guestCover" aria-live="polite"><span class="guest-label">Kepada Yth</span><span class="guest-name">Tamu Undangan</span></div>
+  <img class="cover-image" id="coverImage" src="cover-baru.webp" alt="Wedding of Faisal & Dian" fetchpriority="high">
+  <div class="dynamic-cover-title" id="coverTitle">Wedding of</div><div class="dynamic-couple-name" id="coverCoupleName">Faisal &amp; Dian</div><div class="guest-cover" id="guestCover" aria-live="polite"><span class="guest-label">Kepada Yth</span><span class="guest-name">Tamu Undangan</span></div>
   <button class="open-invite" id="openInvite" type="button">BUKA UNDANGAN</button>
 </section>
 
 <!-- Cover kedua: bagian dari halaman undangan, tanpa tombol -->
 <section class="cover cover-photo" id="innerCover">
-  <img class="cover-image" src="cover-baru.webp" alt="Wedding of Faisal & Dian">
-  <div class="guest-cover" aria-hidden="true"><span class="guest-label">Kepada Yth</span><span class="guest-name" id="innerGuestName">Tamu Undangan</span></div>
+  <img class="cover-image" id="innerCoverImage" src="cover-baru.webp" alt="Wedding of Faisal & Dian">
+  <div class="dynamic-cover-title" aria-hidden="true">Wedding of</div><div class="dynamic-couple-name" id="innerCoverCoupleName">Faisal &amp; Dian</div><div class="guest-cover" aria-hidden="true"><span class="guest-label">Kepada Yth</span><span class="guest-name" id="innerGuestName">Tamu Undangan</span></div>
 </section>
 
 <section id="mempelai">
@@ -338,7 +343,7 @@ document.addEventListener('DOMContentLoaded',function(){
 <section class="thankyou-section">
 <div class="reveal center thankyou-card">
 <div class="kicker">Terima Kasih</div>
-<div class="thankyou-photo-wrap"><img class="thankyou-photo" src="closing.webp" alt="Faisal & Dian"></div>
+<div class="thankyou-photo-wrap"><img class="thankyou-photo" id="closingImage" src="closing.webp" alt="Faisal & Dian"></div>
 <h2 class="thankyou-names">Faisal & Dian</h2>
 <div class="goldline"></div>
 <p>Atas kehadiran saudara/(i) & do'a restunya, kami ucapkan terimakasih.</p>
@@ -564,33 +569,30 @@ if('IntersectionObserver' in window){
 
 <script id="ari-data-bridge">
 (function(){
+  function text(v,fallback=''){return (v===undefined||v===null||v==='')?fallback:String(v)}
+  function esc(v){return text(v).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[ch]))}
+  function formatDate(v){if(!v)return '';const d=new Date(v+'T00:00:00');if(Number.isNaN(d.getTime()))return v;return d.toLocaleDateString('id-ID',{weekday:'long',day:'2-digit',month:'long',year:'numeric'})}
   function apply(d){
     if(!d)return;
-    const q=(s)=>document.querySelector(s);
-    const bride=d.bride||'Dian', groom=d.groom||'Faisal';
-    const names=document.querySelectorAll('#mempelai .caption h2, .ampersand-section .caption h2');
-    if(names[0])names[0].textContent=bride;
-    if(names[1])names[1].textContent=groom;
-    const tn=q('.thankyou-names'); if(tn)tn.textContent=groom+' & '+bride;
-    document.title=groom+' & '+bride+' — Wedding Invitation';
-    document.querySelectorAll('.guest-name').forEach(x=>x.textContent=d.guest||'Tamu Undangan');
-    const events=document.querySelectorAll('#acara .event');
-    const date=d.date?new Date(d.date+'T00:00:00').toLocaleDateString('id-ID',{weekday:'long',day:'2-digit',month:'long',year:'numeric'}):'';
-    events.forEach(ev=>{
-      const p=ev.querySelector('p'); if(!p)return;
-      const lines=p.innerHTML.split('<br>');
-      if(date)lines[0]=date;
-      if(d.time)lines[1]=d.time;
-      if(d.venue)lines[2]=d.venue;
-      if(d.address)lines.splice(3,99);
-      p.innerHTML=lines.slice(0,3).concat(d.address?d.address.split(',').map(x=>x.trim()):[]).join('<br>');
-      const a=ev.querySelector('a.btn'); if(a&&d.maps)a.href=d.maps;
-    });
-    const imgs=document.querySelectorAll('#mempelai .portrait, .ampersand-section .portrait');
-    if(d.bridePhoto&&imgs[0])imgs[0].src=d.bridePhoto;
-    if(d.groomPhoto&&imgs[1])imgs[1].src=d.groomPhoto;
+    const bride=text(d.bride,'Dian'),groom=text(d.groom,'Faisal'),couple=groom+' & '+bride;
+    document.title=couple+' — Wedding Invitation';
+    const coverTitle=document.getElementById('coverTitle'); if(coverTitle)coverTitle.textContent=text(d.coverTitle,'Wedding of');
+    if(d.coverPhoto){['coverImage','innerCoverImage'].forEach(id=>{const im=document.getElementById(id);if(im)im.src=d.coverPhoto})}
+    if(d.closingPhoto){const im=document.getElementById('closingImage');if(im)im.src=d.closingPhoto}
+    document.querySelectorAll('#mempelai .caption h2').forEach(x=>x.textContent=bride);
+    document.querySelectorAll('.ampersand-section .caption h2').forEach(x=>x.textContent=groom);
+    const pc=document.querySelector('#mempelai .caption p');if(pc)pc.textContent=text(d.brideParents,pc.textContent);
+    const gc=document.querySelector('.ampersand-section .caption p');if(gc)gc.textContent=text(d.groomParents,gc.textContent);
+    document.querySelectorAll('.thankyou-names,#coverCoupleName,#innerCoverCoupleName').forEach(x=>x.textContent=couple);
+    document.querySelectorAll('.guest-name').forEach(x=>x.textContent=text(d.guest,'Tamu Undangan'));
+    const events=document.querySelectorAll('#acara .event');const date=formatDate(d.date);
+    events.forEach(ev=>{const p=ev.querySelector('p');if(p){const lines=[];if(date)lines.push(date);if(d.time)lines.push(d.time);if(d.venue)lines.push(d.venue);if(d.address)lines.push(...String(d.address).split(',').map(x=>x.trim()).filter(Boolean));p.innerHTML=lines.map(esc).join('<br>')}const a=ev.querySelector('a.btn');if(a){if(d.maps){a.href=d.maps;a.style.display='inline-flex'}else{a.removeAttribute('href');a.style.display='none'}}});
+    const imgs=document.querySelectorAll('#mempelai .portrait,.ampersand-section .portrait');if(d.bridePhoto&&imgs[0]){imgs[0].src=d.bridePhoto;imgs[0].alt=bride}if(d.groomPhoto&&imgs[1]){imgs[1].src=d.groomPhoto;imgs[1].alt=groom}
+    const story= document.querySelector('.story');
+    if(story){const intro=story.querySelector('.story-intro');if(intro&&d.storyIntro)intro.textContent=d.storyIntro;const vals=[1,2,3,4,5].map(i=>({date:d['story'+i+'Date'],title:d['story'+i+'Title'],text:d['story'+i+'Text'],photo:d['story'+i+'Photo']}));const entries=story.querySelectorAll('.story-entry');vals.forEach((v,i)=>{const e=entries[i];if(!e)return;const sd=e.querySelector('.story-date'),h=e.querySelector('h3'),p=e.querySelector('p'),im=e.querySelector('img');if(sd&&v.date)sd.textContent=v.date;if(h&&v.title)h.textContent=v.title;if(p&&v.text)p.textContent=v.text;if(im&&v.photo){im.src=v.photo}})}
+    const gallery=[d.gallery1,d.gallery2,d.gallery3];document.querySelectorAll('.gallery img').forEach((im,i)=>{if(gallery[i])im.src=gallery[i]});
   }
-  window.addEventListener('message',e=>{if(e.data&&e.data.type==='ARI_INVITATION_DATA')apply(e.data.data)});
+  window.addEventListener('message',e=>{if(e.data&&e.data.type==='ARI_INVITATION_DATA')apply(e.data.data||{})});
   try{apply(JSON.parse(localStorage.getItem('ariInvitation')||'null'))}catch(e){}
 })();
 </script>

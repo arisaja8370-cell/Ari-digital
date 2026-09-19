@@ -1,70 +1,121 @@
 <!doctype html>
 <html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Editor — Ari Digital</title><link rel="stylesheet" href="assets/style.css"></head>
+<title>Editor — Ari Digital</title><link rel="stylesheet" href="assets/style.css"><style>.file-status{display:block;margin-top:7px;color:#777;font-size:.9rem}.file-status.uploading{color:#9a6b2f}.file-status.ok{color:#3f7653}.file-status.err{color:#a33}</style></head>
 <body><header class="nav"><div class="brand">Ari <span>Digital</span></div><a href="templates.html">← Template</a></header>
 <main class="editor"><aside><p class="eyebrow">EDITOR TEMPLATE 01</p><h1>Isi Undangan</h1>
-<p id="modeNote" class="status">Undangan baru — data akan disimpan ke server saat Anda menekan Simpan.</p>
+<p id="modeNote" class="status">Isi semua bagian yang ingin ditampilkan, lalu tekan Simpan.</p>
+
+<h3>Data Mempelai</h3>
 <label>Nama Mempelai Wanita<input id="bride" value="Dian"></label>
 <label>Nama Mempelai Pria<input id="groom" value="Faisal"></label>
 <label>Nama Tamu<input id="guest" placeholder="Bapak/Ibu/Saudara/i"></label>
+<label>Judul Cover<input id="coverTitle" value="Wedding of"></label>
+<label>Nama Orang Tua Mempelai Wanita<input id="brideParents" value="Putri dari Bapak Aprizon & Ibu Herma Yunis"></label>
+<label>Nama Orang Tua Mempelai Pria<input id="groomParents" value="Putra dari Bapak Haris Hasibuan & Ibu Juleha Siregar"></label>
+<label>Foto Cover / Background Foto<input id="coverPhotoFile" type="file" accept="image/*"><input id="coverPhoto" type="hidden"><small class="file-status" id="coverPhotoStatus">Pilih foto dari HP</small></label>
+<label>Foto Mempelai Wanita<input id="bridePhotoFile" type="file" accept="image/*"><input id="bridePhoto" type="hidden"><small class="file-status" id="bridePhotoStatus">Pilih foto dari HP</small></label>
+<label>Foto Mempelai Pria<input id="groomPhotoFile" type="file" accept="image/*"><input id="groomPhoto" type="hidden"><small class="file-status" id="groomPhotoStatus">Pilih foto dari HP</small></label>
+
+<h3>Acara</h3>
 <label>Tanggal Acara<input id="date" type="date"></label>
 <label>Waktu Acara<input id="time" value="09:00 WIB"></label>
-<label>Lokasi<input id="venue" value="Gedung Pernikahan"></label>
+<label>Lokasi<input id="venue" value="Kediaman Mempelai Wanita"></label>
 <label>Alamat<input id="address" value="Jl. Contoh No. 1, Bengkulu"></label>
 <label>Link Google Maps<input id="maps" placeholder="https://maps.google.com/..."></label>
-<label>URL Foto Mempelai Wanita <input id="bridePhoto" placeholder="https://.../foto.jpg"></label>
-<label>URL Foto Mempelai Pria <input id="groomPhoto" placeholder="https://.../foto.jpg"></label>
+
+<h3>Our Love Story</h3>
+<label>Pengantar Love Story<textarea id="storyIntro" rows="4"></textarea></label>
+<div class="story-fields">
+<label>Story 1 — Tahun/Judul<input id="story1Date" placeholder="2019 · Pertemuan"></label>
+<label>Story 1 — Judul<input id="story1Title" placeholder="Awal yang Tak Terduga"></label>
+<label>Story 1 — Cerita<textarea id="story1Text" rows="5"></textarea></label>
+<label>Story 1 — Foto<input id="story1PhotoFile" type="file" accept="image/*"><input id="story1Photo" type="hidden"><small class="file-status" id="story1PhotoStatus">Pilih foto dari HP</small></label>
+
+<label>Story 2 — Tahun/Judul<input id="story2Date" placeholder="Masa HMJ · Kedekatan"></label>
+<label>Story 2 — Judul<input id="story2Title" placeholder="Pendekatan"></label>
+<label>Story 2 — Cerita<textarea id="story2Text" rows="5"></textarea></label>
+<label>Story 2 — Foto<input id="story2PhotoFile" type="file" accept="image/*"><input id="story2Photo" type="hidden"><small class="file-status" id="story2PhotoStatus">Pilih foto dari HP</small></label>
+
+<label>Story 3 — Tahun/Judul<input id="story3Date" placeholder="Tumbuh · Menjadi Nyaman"></label>
+<label>Story 3 — Judul<input id="story3Title" placeholder="Saat Benih Cinta Tumbuh"></label>
+<label>Story 3 — Cerita<textarea id="story3Text" rows="5"></textarea></label>
+<label>Story 3 — Foto<input id="story3PhotoFile" type="file" accept="image/*"><input id="story3Photo" type="hidden"><small class="file-status" id="story3PhotoStatus">Pilih foto dari HP</small></label>
+
+<label>Story 4 — Tahun/Judul<input id="story4Date" placeholder="Perjalanan · Bersama"></label>
+<label>Story 4 — Judul<input id="story4Title" placeholder="Tanpa Tanggal Jadian, Tetap Bersama"></label>
+<label>Story 4 — Cerita<textarea id="story4Text" rows="5"></textarea></label>
+<label>Story 4 — Foto<input id="story4PhotoFile" type="file" accept="image/*"><input id="story4Photo" type="hidden"><small class="file-status" id="story4PhotoStatus">Pilih foto dari HP</small></label>
+
+<label>Story 5 — Tahun/Judul<input id="story5Date" placeholder="2026 · Menuju Pernikahan"></label>
+<label>Story 5 — Judul<input id="story5Title" placeholder="Menuju Satu Ikatan"></label>
+<label>Story 5 — Cerita<textarea id="story5Text" rows="5"></textarea></label>
+<label>Story 5 — Foto<input id="story5PhotoFile" type="file" accept="image/*"><input id="story5Photo" type="hidden"><small class="file-status" id="story5PhotoStatus">Pilih foto dari HP</small></label>
+</div>
+
+<h3>Halaman Penutup</h3>
+<label>Foto Penutup / Background Foto<input id="closingPhotoFile" type="file" accept="image/*"><input id="closingPhoto" type="hidden"><small class="file-status" id="closingPhotoStatus">Pilih foto dari HP</small></label>
+
+<h3>Our Gallery</h3>
+<label>Foto Gallery 1<input id="gallery1File" type="file" accept="image/*"><input id="gallery1" type="hidden"><small class="file-status" id="gallery1Status">Pilih foto dari HP</small></label>
+<label>Foto Gallery 2<input id="gallery2File" type="file" accept="image/*"><input id="gallery2" type="hidden"><small class="file-status" id="gallery2Status">Pilih foto dari HP</small></label>
+<label>Foto Gallery 3<input id="gallery3File" type="file" accept="image/*"><input id="gallery3" type="hidden"><small class="file-status" id="gallery3Status">Pilih foto dari HP</small></label>
+
 <div class="editor-actions"><button class="btn" id="preview">Preview</button><button class="btn" id="save">Simpan Undangan</button><button class="btn ghost" id="publicBtn" disabled>Buka Link Publik</button></div>
 <div id="status" class="status" aria-live="polite">Belum disimpan.</div>
-<p class="muted">Setiap undangan mendapat slug dan token edit sendiri. Pembayaran PRO belum diaktifkan pada tahap ini.</p>
+<p class="muted">Semua bagian di atas tersimpan pada undangan masing-masing. Pembayaran PRO belum diaktifkan pada tahap ini.</p>
 </aside><section class="phone-wrap"><div class="phone"><iframe id="frame" src="templates/template-01/index.html"></iframe></div></section></main>
 <script>
 const API='/api/invitations';
-const ids=['bride','groom','guest','date','time','venue','address','maps','bridePhoto','groomPhoto'];
+const UPLOAD_API='/api/uploads';
+const ids=['bride','groom','guest','coverTitle','coverPhoto','brideParents','groomParents','bridePhoto','groomPhoto','date','time','venue','address','maps','storyIntro','story1Date','story1Title','story1Text','story1Photo','story2Date','story2Title','story2Text','story2Photo','story3Date','story3Title','story3Text','story3Photo','story4Date','story4Title','story4Text','story4Photo','story5Date','story5Title','story5Text','story5Photo','gallery1','gallery2','gallery3','closingPhoto'];
 const params=new URLSearchParams(location.search);
 let slug=params.get('slug')||'';
 let editToken=localStorage.getItem('ariEditToken:'+slug)||'';
-const defaults={bride:'Dian',groom:'Faisal',guest:'Tamu Undangan',date:'2026-10-09',time:'09:00 WIB',venue:'Kediaman Mempelai Wanita',address:'Jl. Contoh No. 1, Bengkulu',maps:'',bridePhoto:'',groomPhoto:''};
-
+const defaults={
+ bride:'Dian',groom:'Faisal',guest:'Tamu Undangan',coverTitle:'Wedding of',coverPhoto:'',
+ brideParents:'Putri dari Bapak Aprizon & Ibu Herma Yunis',groomParents:'Putra dari Bapak Haris Hasibuan & Ibu Juleha Siregar',
+ date:'2026-10-09',time:'09:00 WIB',venue:'Kediaman Mempelai Wanita',address:'Jl. Contoh No. 1, Bengkulu',maps:'',bridePhoto:'',groomPhoto:'',
+ storyIntro:'Setiap kisah memiliki awal yang sederhana. Begitu pula dengan perjalanan kami—bermula dari sebuah pertemuan, tumbuh menjadi kenyamanan, lalu membawa kami menuju satu ikatan.',
+ story1Date:'2019 · Pertemuan',story1Title:'Awal yang Tak Terduga',story1Text:'Tahun 2019 menjadi awal dari cerita kami.',story1Photo:'',
+ story2Date:'Masa HMJ · Kedekatan',story2Title:'Pendekatan',story2Text:'Takdir mempertemukan kami kembali dan komunikasi semakin dekat.',story2Photo:'',
+ story3Date:'Tumbuh · Menjadi Nyaman',story3Title:'Saat Benih Cinta Tumbuh',story3Text:'Rasa nyaman tumbuh perlahan melalui perhatian dan kebersamaan.',story3Photo:'',
+ story4Date:'Perjalanan · Bersama',story4Title:'Tanpa Tanggal Jadian, Tetap Bersama',story4Text:'Kami terus melangkah beriringan dan saling menguatkan.',story4Photo:'',
+ story5Date:'2026 · Menuju Pernikahan',story5Title:'Menuju Satu Ikatan',story5Text:'Kini kami siap melangkah menuju ikatan pernikahan.',story5Photo:'',
+ gallery1:'',gallery2:'',gallery3:'',closingPhoto:''
+};
+const photoPairs=[
+ ['coverPhotoFile','coverPhoto','coverPhotoStatus'],
+ ['bridePhotoFile','bridePhoto','bridePhotoStatus'],['groomPhotoFile','groomPhoto','groomPhotoStatus'],
+ ['story1PhotoFile','story1Photo','story1PhotoStatus'],['story2PhotoFile','story2Photo','story2PhotoStatus'],['story3PhotoFile','story3Photo','story3PhotoStatus'],
+ ['story4PhotoFile','story4Photo','story4PhotoStatus'],['story5PhotoFile','story5Photo','story5PhotoStatus'],
+ ['gallery1File','gallery1','gallery1Status'],['gallery2File','gallery2','gallery2Status'],['gallery3File','gallery3','gallery3Status'],['closingPhotoFile','closingPhoto','closingPhotoStatus']
+];
+async function uploadFile(file, statusEl){
+ if(!file)return '';
+ statusEl.textContent='Mengunggah '+file.name+'…'; statusEl.className='file-status uploading';
+ const fd=new FormData(); fd.append('file',file);
+ const r=await fetch(UPLOAD_API,{method:'POST',body:fd});
+ const j=await r.json();
+ if(!r.ok) throw new Error(j.error||'Upload gagal');
+ statusEl.textContent='✓ '+file.name; statusEl.className='file-status ok';
+ return j.url;
+}
+async function handlePhotoChange(fileId,valueId,statusId){
+ const input=document.getElementById(fileId); const file=input.files&&input.files[0]; if(!file)return;
+ try{const url=await uploadFile(file,document.getElementById(statusId)); document.getElementById(valueId).value=url; sendPreview();}
+ catch(e){const el=document.getElementById(statusId);el.textContent='Gagal upload: '+e.message;el.className='file-status err';}
+}
+photoPairs.forEach(([f,v,st])=>document.getElementById(f).addEventListener('change',()=>handlePhotoChange(f,v,st)));
 function collect(){const d={};ids.forEach(id=>d[id]=document.getElementById(id).value.trim());return d}
-function fill(d){ids.forEach(id=>{if(d[id]!==undefined)document.getElementById(id).value=d[id]})}
+function fill(d){ids.forEach(id=>{if(d[id]!==undefined)document.getElementById(id).value=d[id]});photoPairs.forEach(([f,v,st])=>{const val=document.getElementById(v).value;if(val)document.getElementById(st).textContent='Foto tersimpan';})}
 function sendPreview(){document.getElementById('frame').contentWindow.postMessage({type:'ARI_INVITATION_DATA',data:collect()},'*')}
 function setStatus(t){document.getElementById('status').textContent=t}
-
 async function load(){
-  if(!slug){fill(defaults); setStatus('Undangan baru — tekan Simpan Undangan untuk membuat link unik.'); return}
-  try{
-    const r=await fetch(API+'?slug='+encodeURIComponent(slug));
-    if(!r.ok) throw new Error('Undangan tidak ditemukan');
-    const j=await r.json(); fill(j.data||{}); editToken=editToken||j.editToken||''; 
-    if(j.editToken) localStorage.setItem('ariEditToken:'+slug,j.editToken);
-    document.getElementById('publicBtn').disabled=false;
-    setStatus('Undangan tersimpan. Slug: '+slug);
-    setTimeout(sendPreview,300);
-  }catch(e){setStatus('Gagal memuat: '+e.message)}
+ if(!slug){fill(defaults);setStatus('Undangan baru — isi data lalu tekan Simpan Undangan.');setTimeout(sendPreview,300);return}
+ try{const r=await fetch(API+'?slug='+encodeURIComponent(slug));if(!r.ok)throw new Error('Undangan tidak ditemukan');const j=await r.json();fill(j.data||{});document.getElementById('publicBtn').disabled=false;setStatus('Undangan tersimpan. Slug: '+slug);setTimeout(sendPreview,300)}catch(e){setStatus('Gagal memuat: '+e.message)}
 }
 async function save(){
-  const data=collect();
-  try{
-    let r;
-    if(slug){
-      r=await fetch(API+'?slug='+encodeURIComponent(slug),{method:'PUT',headers:{'Content-Type':'application/json','X-Edit-Token':editToken},body:JSON.stringify({data})});
-    }else{
-      r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({data})});
-    }
-    const j=await r.json();
-    if(!r.ok) throw new Error(j.error||'Gagal menyimpan');
-    slug=j.slug; editToken=j.editToken||editToken; localStorage.setItem('ariEditToken:'+slug,editToken);
-    history.replaceState({},'',location.pathname+'?slug='+encodeURIComponent(slug));
-    document.getElementById('publicBtn').disabled=false;
-    document.getElementById('publicBtn').onclick=()=>location.href='invitation.html?slug='+encodeURIComponent(slug);
-    setStatus('Tersimpan! Link publik: '+location.origin+'/invitation.html?slug='+slug);
-  }catch(e){setStatus('Gagal: '+e.message)}
-  sendPreview();
+ const data=collect();try{let r;if(slug){r=await fetch(API+'?slug='+encodeURIComponent(slug),{method:'PUT',headers:{'Content-Type':'application/json','X-Edit-Token':editToken},body:JSON.stringify({data})})}else{r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({data})})}const j=await r.json();if(!r.ok)throw new Error(j.error||'Gagal menyimpan');slug=j.slug;editToken=j.editToken||editToken;localStorage.setItem('ariEditToken:'+slug,editToken);history.replaceState({},'',location.pathname+'?slug='+encodeURIComponent(slug));document.getElementById('publicBtn').disabled=false;setStatus('Tersimpan! Link publik: '+location.origin+'/invitation.html?slug='+slug)}catch(e){setStatus('Gagal: '+e.message)}sendPreview()
 }
-document.getElementById('preview').onclick=sendPreview;
-document.getElementById('save').onclick=save;
-document.getElementById('frame').onload=sendPreview;
-document.getElementById('publicBtn').onclick=()=>location.href='invitation.html?slug='+encodeURIComponent(slug);
-load();
+document.getElementById('preview').onclick=sendPreview;document.getElementById('save').onclick=save;document.getElementById('frame').onload=sendPreview;document.getElementById('publicBtn').onclick=()=>location.href='invitation.html?slug='+encodeURIComponent(slug);load();
 </script></body></html>
