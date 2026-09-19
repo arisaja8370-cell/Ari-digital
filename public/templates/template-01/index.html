@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b0705">
+<title>Faisal & Dian — Wedding Invitation</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:auto}
+body{margin:0;background:#080504;color:#f7e7c8;font-family:Georgia,"Times New Roman",serif;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;background:url("bg.webp") center/cover no-repeat;filter:blur(7px) brightness(.34);transform:scale(1.06);z-index:-2}
+body:after{content:"";position:fixed;inset:0;background:rgba(7,4,3,.28);z-index:-1}
+.wrap{max-width:720px;margin:auto}
+section{min-height:100svh;position:relative;display:flex;align-items:center;justify-content:center;padding:70px 22px;overflow:hidden}
+.reveal{opacity:0;transform:translateY(35px) scale(.98);transition:opacity 1s ease,transform 1s cubic-bezier(.2,.8,.2,1)}
+.reveal.show{opacity:1;transform:none}
+.kicker{font:600 11px Arial,sans-serif;letter-spacing:4px;text-transform:uppercase;opacity:.72}
+.title{font-size:clamp(42px,13vw,78px);line-height:.95;font-weight:400;margin:12px 0}
+.goldline{width:90px;height:1px;background:rgba(244,215,162,.7);margin:20px auto}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 20px;border:1px solid rgba(244,215,162,.5);border-radius:24px;background:rgba(25,13,7,.72);color:#f8e6c2;text-decoration:none;font:600 12px Arial,sans-serif;letter-spacing:.4px;cursor:pointer}
+.cover{text-align:center;background:radial-gradient(circle,rgba(105,53,20,.22),transparent 58%)}
+.cover-photo{padding:0;display:block;min-height:0;position:relative;background:#050302}
+.cover-image{display:block;width:100%;height:auto}
+.cover-hotspot{position:absolute;z-index:8;left:39%;top:63.5%;width:22%;height:6%;border-radius:50%;background:transparent;cursor:pointer}
+.cover-hotspot:focus{outline:2px solid rgba(244,215,162,.8);outline-offset:3px}
+.cover .date{font-size:14px;letter-spacing:3px}
+.cover .names{font-size:clamp(40px,12vw,70px);margin:18px 0 8px}
+.scroll{position:absolute;bottom:28px;font:10px Arial,sans-serif;letter-spacing:2px;opacity:.55}
+.portrait{width:min(88vw,520px);max-height:72svh;object-fit:cover;object-position:center;border-radius:4px;box-shadow:0 20px 50px rgba(0,0,0,.55);display:block}
+.portrait-card{text-align:center}
+.caption{margin-top:18px}
+.caption h2{font-size:29px;font-weight:400;margin:5px}
+.caption p{font:11px/1.5 Arial,sans-serif;opacity:.7;margin:0}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:center}
+.duo img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:4px}
+.center{text-align:center}
+.card{width:100%;max-width:620px;padding:30px 22px;border:1px solid rgba(222,182,116,.35);border-radius:18px;background:rgba(14,8,5,.74);box-shadow:0 12px 40px rgba(0,0,0,.3)}
+.card h2{text-align:center;font-weight:400;font-size:30px;margin:0 0 18px}
+.card p{font:14px/1.8 Arial,sans-serif;text-align:center;opacity:.9}
+.event{padding:18px 0;border-top:1px solid rgba(222,182,116,.2)}
+.event:last-child{border-bottom:1px solid rgba(222,182,116,.2)}
+.event strong{display:block;font:600 12px Arial,sans-serif;letter-spacing:3px;text-transform:uppercase;margin-bottom:9px}
+.story{text-align:left;position:relative;overflow:hidden;padding:30px 24px 34px!important}
+.story:before{content:"";position:absolute;left:22px;top:148px;bottom:40px;width:1px;background:linear-gradient(to bottom,transparent,rgba(222,182,116,.55) 7%,rgba(222,182,116,.28) 93%,transparent);pointer-events:none}
+.story .kicker{text-align:center;margin-bottom:10px}
+.story-intro{text-align:center;max-width:470px;margin:0 auto 34px!important;padding:0 8px;font:italic 13px/1.9 Georgia,"Times New Roman",serif;letter-spacing:.15px;opacity:.72!important}
+.story-entry{position:relative;margin:0 0 34px;padding-left:24px}
+.story-entry:last-child{margin-bottom:0}
+.story-entry:before{content:"";position:absolute;left:18px;top:4px;width:7px;height:7px;border:1px solid rgba(244,215,162,.9);border-radius:50%;background:#120a06;box-shadow:0 0 0 4px rgba(244,215,162,.07);z-index:2}
+.story-date{display:block;font:600 9px/1.4 Arial,sans-serif;letter-spacing:2.2px;text-transform:uppercase;color:#e8c78e;opacity:.72;margin:0 0 7px}
+.story h3{font:400 21px/1.3 Georgia,"Times New Roman",serif;letter-spacing:.15px;margin:0 0 11px;color:#f4e4c7;position:relative;padding:0}
+.story p{font:13px/1.95 Arial,sans-serif;letter-spacing:.08px;text-align:justify;text-justify:inter-word;color:rgba(255,248,236,.88);margin:0;position:relative}
+.story-photo-wrap{position:relative;width:min(88%,300px);margin:20px 0 8px;padding:7px;border:1px solid rgba(222,182,116,.48);border-radius:16px;background:linear-gradient(145deg,rgba(244,215,162,.08),rgba(0,0,0,.18));box-shadow:0 16px 38px rgba(0,0,0,.42),inset 0 0 0 1px rgba(255,255,255,.025)}
+.story-photo-wrap:before{content:"";position:absolute;inset:4px;border:1px solid rgba(244,215,162,.13);border-radius:12px;pointer-events:none}
+.story-photo{display:block;width:100%;height:auto;max-height:430px;object-fit:contain;margin:0;border-radius:10px;box-shadow:none;background:#050302;opacity:0;transform:translateY(26px) scale(.97);transition:opacity 1.05s ease,transform 1.15s cubic-bezier(.22,1,.36,1)}
+.story-photo.visible{opacity:1;transform:translateY(0) scale(1)}
+.story-entry:nth-child(3) .story-photo-wrap{margin-right:auto}
+.story-entry:nth-child(4) .story-photo-wrap{margin-left:auto}
+.story-entry:nth-child(5) .story-photo-wrap{margin-right:auto}
+.story-entry:nth-child(6) .story-photo-wrap{margin-left:auto}
+.story-entry:nth-child(7) .story-photo-wrap{margin-right:auto}
+@media(max-width:480px){.story{padding:28px 17px 30px!important}.story:before{left:15px;top:145px}.story-entry{padding-left:21px;margin-bottom:31px}.story-entry:before{left:11px}.story h3{font-size:19px;line-height:1.35}.story p{font-size:12.5px;line-height:1.9;text-align:left}.story-photo-wrap{width:92%;margin-left:auto!important;margin-right:auto!important}}
+.gallery{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%}
+.gallery img{width:100%;border-radius:6px;display:block;box-shadow:0 12px 30px rgba(0,0,0,.35);opacity:0;transform:translateY(45px) scale(.94);filter:blur(2px);transition:opacity .9s ease,transform 1s cubic-bezier(.2,.8,.2,1),filter .9s ease;will-change:opacity,transform,filter}.gallery img.photo-show{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}.gallery img:nth-child(1){transition-delay:.05s}.gallery img:nth-child(2){transition-delay:.22s}.gallery img:nth-child(3){transition-delay:.39s}.gallery img:nth-child(4){transition-delay:.56s}.gallery img:nth-child(5){transition-delay:.73s}.gallery img:nth-child(6){transition-delay:.90s}@media (prefers-reduced-motion:reduce){.gallery img{opacity:1;transform:none;filter:none;transition:none}}
+.gallery img:first-child{grid-column:1/-1}
+.bank{padding:18px 0;border-top:1px solid rgba(222,182,116,.2)}
+.bank:last-child{border-bottom:1px solid rgba(222,182,116,.2)}
+.bank .bankname{font:600 11px Arial,sans-serif;letter-spacing:3px}
+.bank .holder{font:600 13px Arial,sans-serif;margin-top:7px}
+.account{font:700 20px Arial,sans-serif;letter-spacing:1px;margin:10px 0}
+.rsvp-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.rsvp-btn{min-height:43px;border-radius:10px;border:1px solid rgba(244,215,162,.35);background:rgba(255,255,255,.04);color:#f7e7c8;font:700 11px Arial,sans-serif;cursor:pointer}
+.rsvp-btn.selected{background:rgba(244,215,162,.2);border-color:rgba(244,215,162,.8)}
+input,textarea{width:100%;margin-top:9px;padding:12px;border-radius:10px;border:1px solid rgba(244,215,162,.22);background:rgba(0,0,0,.28);color:white;outline:0;font:13px Arial,sans-serif}
+textarea{min-height:100px;resize:vertical}
+.music{position:fixed;right:14px;bottom:14px;width:45px;height:45px;border-radius:50%;z-index:50;border:1px solid rgba(255,255,255,.45);background:rgba(20,10,6,.76);color:#fff;font-size:17px}
+@media(max-width:480px){section{padding:58px 16px}.card{padding:24px 16px}}
+
+/* TRUE COVER GATE */
+.cover-photo{position:relative;min-height:100svh;background:#050302}
+.cover-image{width:100%;height:auto;display:block}
+.open-invite{position:absolute;left:25%;right:25%;top:82%;z-index:10;min-height:48px;padding:12px 18px;border:1px solid rgba(244,215,162,.65);border-radius:999px;background:rgba(20,10,6,.68);color:#f7e6c8;font:600 12px Arial,sans-serif;letter-spacing:2px;box-shadow:0 8px 25px rgba(0,0,0,.4);cursor:pointer}.open-invite:active{transform:scale(.98)}.guest-cover{position:absolute;left:8%;right:8%;top:65%;text-align:center;color:#f7e6c8;text-shadow:0 2px 9px #000;letter-spacing:.2px;z-index:9;display:flex;flex-direction:column;align-items:center;gap:4px}.guest-label{font:600 11px/1.3 Arial,sans-serif;letter-spacing:1.5px}.guest-name{font:600 15px/1.35 Arial,sans-serif}
+@keyframes pulseGate{0%,100%{box-shadow:0 0 0 0 rgba(245,220,180,.16),0 8px 25px rgba(0,0,0,.4)}50%{box-shadow:0 0 0 9px rgba(245,220,180,0),0 8px 25px rgba(0,0,0,.4)}}
+/* COVER OPEN: slide upward like a page/sheet */
+.cover-photo.cover-opening{
+  position:fixed!important;
+  inset:0!important;
+  width:100%;
+  height:100svh!important;
+  min-height:100svh!important;
+  z-index:1000;
+  transform:translateY(0);
+  transition:transform .85s cubic-bezier(.77,0,.18,1);
+  will-change:transform;
+}
+.cover-photo.cover-opening.slide-up{transform:translateY(-105%);}
+.cover-photo.cover-opened{display:none!important;}
+@media(prefers-reduced-motion:reduce){
+  .cover-photo.cover-opening{transition:none}
+}
+
+body.locked{height:100svh;overflow:hidden}
+body.unlocked{overflow-x:hidden}
+@media(max-width:500px){.guest-cover{top:65%;}.guest-label{font-size:10px}.guest-name{font-size:14px}.open-invite{left:20%;right:20%;top:89%;min-height:46px}}
+
+/* CENTERED PORTRAIT & AMPERSAND */
+#memepalai{display:flex;justify-content:center;align-items:center}
+#memepalai .portrait-card{width:100%;max-width:620px;margin:0 auto;text-align:center}
+#mempelai .portrait-card{width:100%;max-width:620px;margin:0 auto;text-align:center}
+#mempelai .portrait{display:block;width:min(88vw,520px);height:auto;margin:0 auto;object-position:center center}
+.ampersand-section{min-height:42svh!important;padding:18px 20px 40px!important;display:flex!important;align-items:flex-start!important;justify-content:center!important}
+.ampersand-symbol{font-size:44px;line-height:1;margin:-18px auto 24px;text-align:center;font-family:Georgia,"Times New Roman",serif;color:#f7e7c8;position:relative;z-index:3}
+.ampersand-section .portrait-card{width:100%;text-align:center;margin:0 auto}
+
+/* THANK YOU PHOTO DESIGN */
+.thankyou-section{padding-top:52px;padding-bottom:70px}
+.thankyou-card{max-width:560px;padding:34px 24px 30px;border:1px solid rgba(222,182,116,.28);border-radius:24px;background:linear-gradient(180deg,rgba(20,10,6,.78),rgba(8,4,3,.58));box-shadow:0 18px 55px rgba(0,0,0,.4);position:relative;overflow:hidden}
+.thankyou-card:before{content:"";position:absolute;inset:12px;border:1px solid rgba(244,215,162,.12);border-radius:18px;pointer-events:none}
+.thankyou-photo-wrap{width:min(88vw,420px);margin:24px auto 22px;position:relative}
+.thankyou-photo{display:block;width:100%;height:auto;object-fit:contain;object-position:center;border:0;border-radius:0;box-shadow:0 14px 34px rgba(0,0,0,.34)}
+.thankyou-names{font-size:38px!important;font-weight:400!important;margin:4px 0 0!important}
+.thankyou-card p{max-width:410px;margin:0 auto;font-size:13px!important;line-height:1.9!important;opacity:.78!important}
+.thankyou-ornament{margin-top:20px;font-size:16px;opacity:.55;letter-spacing:8px}
+@media(max-width:480px){.thankyou-card{padding:30px 18px 26px}.thankyou-photo-wrap{width:min(88vw,420px)}.thankyou-names{font-size:32px!important}}
+</style>
+<style id="photo-auto-style">.enhanced-photo{opacity:0;transform:translateY(34px) scale(.94);transition:opacity .8s ease,transform .9s ease}.enhanced-photo.is-visible{opacity:1;transform:none}.enhanced-photo.is-visible img{animation:gpz 5s ease-in-out both}@keyframes gpz{from{transform:scale(1)}to{transform:scale(1.045)}}@media(prefers-reduced-motion:reduce){.enhanced-photo,.enhanced-photo.is-visible img{animation:none!important;transition:none!important}}</style><script id="photo-auto-script">document.addEventListener('DOMContentLoaded',()=>{const wanted=['dian','faisal','gallery1','gallery2','gallery3'];const imgs=[...document.querySelectorAll('img')];const els=[];imgs.forEach(im=>{const x=((im.src||'')+' '+(im.alt||'')+' '+(im.id||'')+' '+(im.className||'')).toLowerCase();if(wanted.some(n=>x.includes(n))){let e=im.parentElement&&im.parentElement.children.length<=3?im.parentElement:im;if(!els.includes(e)){e.classList.add('enhanced-photo');e.style.transitionDelay=(els.length*120)+'ms';els.push(e)}}});if('IntersectionObserver'in window){const o=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-visible');o.unobserve(e.target)}}),{threshold:.12});els.forEach(e=>o.observe(e))}else els.forEach(e=>e.classList.add('is-visible'))})</script>
+<style id="enhanced-gallery-effects">
+.enhanced-photo{
+  opacity:0;
+  transform:translateY(34px) scale(.94);
+  transition:opacity .85s ease,transform .95s cubic-bezier(.2,.75,.25,1);
+  will-change:opacity,transform;
+}
+.enhanced-photo.is-visible{opacity:1;transform:translateY(0) scale(1)}
+.enhanced-photo.is-visible img{animation:gentlePhotoZoom 5.5s ease-in-out both}
+@keyframes gentlePhotoZoom{from{transform:scale(1)}to{transform:scale(1.045)}}
+@media(prefers-reduced-motion:reduce){
+ .enhanced-photo,.enhanced-photo.is-visible img{animation:none!important;transition:none!important;transform:none!important}
+}
+</style>
+<script id="enhanced-gallery-effects">
+document.addEventListener('DOMContentLoaded',function(){
+  // Photo entrance effects only. Cover is never part of auto-scroll.
+  const wanted=['dian','faisal','gallery1','gallery2','gallery3'];
+  const els=[];
+  [...document.querySelectorAll('img')].filter(img=>{
+    const q=((img.src||'')+' '+(img.alt||'')+' '+(img.id||'')+' '+String(img.className||'')).toLowerCase();
+    return wanted.some(x=>q.includes(x));
+  }).forEach((img,i)=>{
+    let el=img.parentElement&&img.parentElement.children.length<=3?img.parentElement:img;
+    if(!els.includes(el)){el.classList.add('enhanced-photo');el.style.transitionDelay=(i*120)+'ms';els.push(el)}
+  });
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver(es=>es.forEach(e=>{
+      if(e.isIntersecting){e.target.classList.add('is-visible');io.unobserve(e.target)}
+    }),{threshold:.16});
+    els.forEach(e=>io.observe(e));
+  }else els.forEach(e=>e.classList.add('is-visible'));
+});
+</script>
+
+
+<style id="portrait-gallery-final-effects">
+/* FOTO MEMPELAI: geser datar dari kiri/kanan */
+#mempelai .portrait-card{
+  opacity:0;
+  transform:translateX(-90px) scale(.98);
+  transition:opacity 1.3s ease, transform 1.55s cubic-bezier(.22,.75,.2,1);
+  will-change:opacity,transform;
+}
+#mempelai .portrait-card.show{opacity:1;transform:translateX(0) scale(1)}
+.ampersand-section .portrait-card{
+  opacity:0;
+  transform:translateX(90px) scale(.98);
+  transition:opacity 1.3s ease, transform 1.55s cubic-bezier(.22,.75,.2,1);
+  will-change:opacity,transform;
+}
+.ampersand-section .portrait-card.show{opacity:1;transform:translateX(0) scale(1)}
+/* GALLERY: efek terbit dari bawah, bertahap seperti muncul ke permukaan */
+.gallery .photo-reveal{
+  opacity:0;
+  transform:translateY(85px) scale(.92);
+  filter:blur(5px);
+  clip-path:inset(18% 0 0 0 round 6px);
+  transition:opacity 1.3s ease, transform 1.55s cubic-bezier(.2,.78,.18,1), filter 1.45s ease, clip-path 1.45s ease;
+  will-change:opacity,transform,filter,clip-path;
+}
+.gallery .photo-reveal.photo-show{
+  opacity:1;
+  transform:translateY(0) scale(1);
+  filter:blur(0);
+  clip-path:inset(0 0 0 0 round 6px);
+}
+.gallery .photo-reveal:nth-child(1){transition-delay:.08s}
+.gallery .photo-reveal:nth-child(2){transition-delay:.30s}
+.gallery .photo-reveal:nth-child(3){transition-delay:.52s}
+@media(prefers-reduced-motion:reduce){
+ #mempelai .portrait-card,.ampersand-section .portrait-card,.gallery .photo-reveal{opacity:1;transform:none;filter:none;clip-path:none;transition:none!important}
+}
+
+</style>
+<style id="photo-harmony-v31">
+/* V31 — Foto dibuat lebih menyatu dengan tema cokelat-gold */
+.photo-harmony{position:relative}
+#mempelai .portrait-card,.ampersand-section .portrait-card{position:relative}
+#mempelai .portrait-card:after,.ampersand-section .portrait-card:after{content:"";position:absolute;left:8%;right:8%;top:8%;height:62%;background:radial-gradient(ellipse at center,rgba(244,215,162,.13),transparent 68%);filter:blur(20px);z-index:-1;pointer-events:none}
+#mempelai .portrait,.ampersand-section .portrait{border-radius:18px;box-shadow:0 24px 55px rgba(0,0,0,.48),0 0 0 1px rgba(244,215,162,.14);background:rgba(15,8,5,.35);padding:5px;object-fit:cover;}
+#mempelai .portrait{mask-image:linear-gradient(to bottom,#000 88%,transparent 100%);}
+.ampersand-section .portrait{mask-image:linear-gradient(to bottom,#000 88%,transparent 100%);}
+.caption h2{color:#f2ddba;text-shadow:0 2px 16px rgba(0,0,0,.5)}
+.caption p{color:rgba(248,231,200,.72)}
+.story-photo-wrap{width:min(90%,330px);padding:5px;margin-top:22px;border:0;border-radius:18px;background:linear-gradient(135deg,rgba(244,215,162,.13),rgba(28,14,8,.72) 48%,rgba(244,215,162,.06));box-shadow:0 18px 42px rgba(0,0,0,.46),0 0 0 1px rgba(244,215,162,.12);overflow:hidden}
+.story-photo-wrap:before{inset:5px;border:1px solid rgba(244,215,162,.16);border-radius:14px}
+.story-photo{border-radius:14px;background:#0a0503;mix-blend-mode:normal;box-shadow:inset 0 0 28px rgba(0,0,0,.22);}
+.story-photo-wrap:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(244,215,162,.05),transparent 30%,rgba(0,0,0,.12));pointer-events:none}
+.gallery{gap:13px;padding:4px 0}
+.gallery img{border-radius:16px;box-shadow:0 18px 38px rgba(0,0,0,.46),0 0 0 1px rgba(244,215,162,.13);background:linear-gradient(145deg,rgba(244,215,162,.08),rgba(12,6,4,.5));padding:4px;object-fit:cover;transition:opacity .9s ease,transform 1s cubic-bezier(.2,.8,.2,1),filter .9s ease,box-shadow .5s ease}
+.gallery img:hover{box-shadow:0 22px 44px rgba(0,0,0,.52),0 0 0 1px rgba(244,215,162,.28)}
+.gallery img:first-child{border-radius:19px}
+.thankyou-photo-wrap{padding:5px;border-radius:20px;background:linear-gradient(145deg,rgba(244,215,162,.13),rgba(12,6,4,.65));box-shadow:0 20px 46px rgba(0,0,0,.46),0 0 0 1px rgba(244,215,162,.12)}
+.thankyou-photo{border-radius:15px;mask-image:linear-gradient(to bottom,#000 92%,transparent 100%)}
+@media(max-width:480px){
+  #mempelai .portrait,.ampersand-section .portrait{padding:4px;border-radius:15px}
+  .story-photo-wrap{width:94%;border-radius:16px}
+  .gallery{gap:9px}
+  .gallery img{padding:3px;border-radius:13px}
+}
+</style>
+</head>
+<body class="locked">
+<div class="wrap">
+
+<section class="cover cover-photo" id="coverGate">
+  <img class="cover-image" src="cover-baru.webp" alt="Wedding of Faisal & Dian" fetchpriority="high">
+  <div class="guest-cover" id="guestCover" aria-live="polite"><span class="guest-label">Kepada Yth</span><span class="guest-name">Tamu Undangan</span></div>
+  <button class="open-invite" id="openInvite" type="button">BUKA UNDANGAN</button>
+</section>
+
+<!-- Cover kedua: bagian dari halaman undangan, tanpa tombol -->
+<section class="cover cover-photo" id="innerCover">
+  <img class="cover-image" src="cover-baru.webp" alt="Wedding of Faisal & Dian">
+  <div class="guest-cover" aria-hidden="true"><span class="guest-label">Kepada Yth</span><span class="guest-name" id="innerGuestName">Tamu Undangan</span></div>
+</section>
+
+<section id="mempelai">
+<div class="portrait-card reveal">
+<div class="kicker">Mempelai</div>
+<p style="font:13px/1.7 Arial,sans-serif;max-width:520px;margin:14px auto 22px">Maha Suci Allah Subhanahu Wa Ta'ala Yang telah menciptakan makhluk-Nya berpasang-pasangan. Ya Allah perkenankanlah dan Ridhoilah pernikahan Kami.</p>
+<img class="portrait" src="dian.webp" alt="Dian Putri Diana">
+<div class="caption"><h2>Dian Putri Diana</h2><p>Putri dari Bapak Aprizon & Ibu Herma Yunis</p></div>
+</div>
+</section>
+
+<section class="ampersand-section">
+<div class="portrait-card reveal">
+<div class="ampersand-symbol" aria-label="dan">&amp;</div>
+<img class="portrait" src="faisal.webp" alt="Ahmad Faisal Hasibuan">
+<div class="caption"><h2>Ahmad Faisal Hasibuan</h2><p>Putra dari Bapak Haris Hasibuan & Ibu Juleha Siregar</p></div>
+</div>
+</section>
+
+<section id="acara">
+<div class="card reveal">
+<div class="kicker center">Save The Date</div><h2>Hari Bahagia</h2>
+<div class="event"><strong>Akad Nikah</strong><p>Jum'at, 09 Oktober 2026<br>08.00 WIB - Selesai<br>Kediaman Mempelai Wanita<br>Jln. Walan, Pintu Angin,<br>Jorong Koto Gadang Hilir Padang Ganting</p>
+<a class="btn" target="_blank" rel="noopener" href="https://maps.app.goo.gl/dYMqNaJFXsVh17b58?g_st=aw">📍 Google Maps</a></div>
+<div class="event"><strong>Resepsi</strong><p>Jum'at, 09 Oktober 2026<br>10.00 WIB - Selesai<br>Kediaman Mempelai Wanita<br>Jln. Walan, Pintu Angin,<br>Jorong Koto Gadang Hilir Padang Ganting</p>
+<a class="btn" target="_blank" rel="noopener" href="https://maps.app.goo.gl/dYMqNaJFXsVh17b58?g_st=aw">📍 Google Maps</a></div>
+</div>
+</section>
+
+<section>
+<div class="card story reveal">
+<div class="kicker center">Our Love Story</div>
+<p class="story-intro">Setiap kisah memiliki awal yang sederhana. Begitu pula dengan perjalanan kami—bermula dari sebuah pertemuan, tumbuh menjadi kenyamanan, lalu membawa kami menuju satu ikatan.</p>
+<div class="story-entry">
+<span class="story-date">2019 · Pertemuan</span>
+<h3>Awal yang Tak Terduga</h3>
+<p>Tahun 2019 menjadi awal dari cerita kami. Saat itu, aku masih mahasiswa baru di jurusan Mazawa, sedangkan dia adalah seniorku. Awalnya, aku justru merasa tidak suka karena dia terkesan cuek. Bahkan ketika aku hendak meminjam buku, dia enggan memberikannya. Dari situlah aku sempat berpikir, “Sungguh, orang yang pelit dan sulit didekati.” Tanpa kusadari, rasa tidak suka itu menjadi bagian kecil dari awal perjalanan kami.</p>
+<div class="story-photo-wrap"><img class="story-photo" src="story1.webp" alt="Kisah kami - foto 1"></div>
+</div>
+<div class="story-entry">
+<span class="story-date">Masa HMJ · Kedekatan</span>
+<h3>Pendekatan</h3>
+<p>Namun, takdir berkata lain. Kami tergabung dalam organisasi yang sama dan dia dipercaya menjadi Ketua HMJ. Saat itu, belum ada rasa saling suka di antara kami, meskipun cukup sering bertemu hingga masa kepengurusan berakhir. Memasuki periode berikutnya, komunikasi dan pertemuan kami semakin sering. Dari diskusi, kerja sama, dan saling membantu, perlahan pandanganku tentang dirinya pun berubah.</p>
+<div class="story-photo-wrap"><img class="story-photo" src="story2.webp" alt="Kisah kami - foto 2"></div>
+</div>
+<div class="story-entry">
+<span class="story-date">Tumbuh · Menjadi Nyaman</span>
+<h3>Saat Benih Cinta Tumbuh</h3>
+<p>Hingga suatu saat, aku dipercaya untuk menjabat sebagai Bendahara Umum. Di sinilah segalanya mulai berubah. Komunikasi, perhatian, dan bimbingannya terasa semakin dekat. Rasa segan dan tidak suka perlahan menghilang, digantikan oleh rasa nyaman yang tumbuh tanpa kami sadari.</p>
+<div class="story-photo-wrap"><img class="story-photo" src="story3.webp" alt="Kisah kami - foto 3"></div>
+</div>
+<div class="story-entry">
+<span class="story-date">Perjalanan · Bersama</span>
+<h3>Tanpa Tanggal Jadian, Tetap Bersama</h3>
+<p>Tak ada tanggal pasti yang menandai kapan kami resmi bersama. Rasa cinta itu tumbuh begitu saja, mengalir secara alami hingga kami menyelesaikan masa perkuliahan. Hingga kini, kami tetap melangkah beriringan, menjaga hati, saling menguatkan, dan melanjutkan perjalanan ini bersama.</p>
+<div class="story-photo-wrap"><img class="story-photo" src="story4.webp" alt="Kisah kami - foto 4"></div>
+</div>
+<div class="story-entry">
+<span class="story-date">2026 · Menuju Pernikahan</span>
+<h3>Menuju Satu Ikatan</h3>
+<p>Dari sebuah awal yang penuh rasa tidak suka, perlahan tumbuh menjadi cinta hingga akhirnya menyatukan hati. Pada 2 Februari 2026, menjadi pertemuan pertama dalam silaturahmi keluarga. Kemudian, pada 27 Juni 2026, dengan restu kedua orang tua, dia datang bersama keluarga untuk melamar dan mengajak kami melangkah ke jenjang yang lebih serius. Semua ini adalah bagian dari rencana indah Allah. Dengan ridha-Nya, kami kini siap melangkah lebih jauh dan menyatukan hidup dalam ikatan pernikahan yang sakinah, mawaddah, dan warahmah.</p>
+</div>
+</div>
+</section>
+
+<section>
+<div class="card reveal center">
+<div class="kicker">Our Gallery</div><h2>Gallery</h2>
+<div class="gallery"><img class="photo-reveal" src="gallery1.webp" alt="Gallery 1"><img class="photo-reveal" src="gallery2.webp" alt="Gallery 2"><img class="photo-reveal" src="gallery3.webp" alt="Gallery 3"></div>
+</div>
+</section>
+
+<section>
+<div class="card reveal">
+<div class="kicker center">Wedding Gift</div><h2>Hadiah Pernikahan</h2>
+<div class="bank"><div class="bankname">BANK BSI</div><div class="holder">DIAN PUTRI DIANA</div><div class="account">7214906559</div><button class="btn" onclick="copyAcc('7214906559',this)">Salin Rekening</button></div>
+<div class="bank"><div class="bankname">BANK BRI</div><div class="holder">AHMAD FAISAL HASIBUAN</div><div class="account">541601020559534</div><button class="btn" onclick="copyAcc('541601020559534',this)">Salin Rekening</button></div>
+<p style="font:13px/1.8 Arial,sans-serif;opacity:.8;text-align:center;margin-top:22px">Do'a restu keluarga, Sahabat, serta rekan-rekan semua di pernikahan kami sudah sangat cukup sebagai hadiah.</p>
+</div>
+</section>
+
+<section id="rsvp">
+<div class="card reveal">
+<div class="kicker center">Buku Tamu Digital</div><h2>Reservasi</h2>
+<div class="rsvp-grid"><button class="rsvp-btn" data-v="Hadir" onclick="att(this)">TOTAL HADIR</button><button class="rsvp-btn" data-v="Tidak hadir" onclick="att(this)">TIDAK HADIR</button></div>
+<input id="rname" placeholder="Nama Anda">
+<input id="rcount" type="number" min="1" max="20" placeholder="Jumlah hadir">
+<textarea id="rmsg" placeholder="Sapaan hangat / ucapan yang masuk"></textarea>
+<button class="btn" style="width:100%;margin-top:10px" onclick="rsvp()">Kirim RSVP & Ucapan</button>
+<div id="result" style="font:12px/1.5 Arial,sans-serif;text-align:center;min-height:20px;margin-top:10px"></div>
+<div id="guestbook" style="margin-top:18px"></div>
+</div>
+</section>
+
+<section class="thankyou-section">
+<div class="reveal center thankyou-card">
+<div class="kicker">Terima Kasih</div>
+<div class="thankyou-photo-wrap"><img class="thankyou-photo" src="closing.webp" alt="Faisal & Dian"></div>
+<h2 class="thankyou-names">Faisal & Dian</h2>
+<div class="goldline"></div>
+<p>Atas kehadiran saudara/(i) & do'a restunya, kami ucapkan terimakasih.</p>
+<div class="thankyou-ornament">✦</div>
+</div>
+</section>
+
+</div>
+
+<audio id="music" src="musik.mp3" preload="none" loop></audio>
+<button id="musicBtn" class="music" type="button">♫</button>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')}),{threshold:.16});
+document.querySelectorAll('.reveal').forEach(x=>io.observe(x));
+const photoIo=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('photo-show');photoIo.unobserve(e.target)}}),{threshold:.18,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.photo-reveal').forEach(x=>photoIo.observe(x));
+
+const music=document.getElementById('music'), mb=document.getElementById('musicBtn');
+function play(){music.volume=.7;const p=music.play();if(p)p.catch(()=>{})}
+mb.onclick=()=>{if(music.paused){play();mb.textContent='❚❚'}else{music.pause();mb.textContent='♫'}};
+
+
+let attendance='';
+function att(b){document.querySelectorAll('.rsvp-btn').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');attendance=b.dataset.v}
+function getRSVP(){try{return JSON.parse(localStorage.getItem('fd_rsvp')||'[]')}catch(e){return []}}
+function esc(v){return String(v??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[ch]))}
+function renderGuestbook(){
+ const box=document.getElementById('guestbook'),a=getRSVP().slice().reverse();
+ if(!a.length){box.innerHTML='';return}
+ box.innerHTML='<div style="font:700 11px Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px;text-align:center;opacity:.8">Ucapan Tamu</div>'+a.map(x=>`<div style="padding:12px 14px;margin:8px 0;border:1px solid rgba(244,215,162,.18);border-radius:12px;background:rgba(255,255,255,.035)"><div style="font:700 13px Arial,sans-serif">${esc(x.n)}</div><div style="font:11px Arial,sans-serif;opacity:.65;margin:3px 0 7px">${esc(x.attendance)}${x.c&&x.attendance==='Hadir'?' · '+esc(x.c)+' orang':''}</div>${x.m?`<div style="font:12px/1.6 Arial,sans-serif;opacity:.9">${esc(x.m)}</div>`:''}</div>`).join('');
+}
+function rsvp(){
+ const n=document.getElementById('rname').value.trim(),c=document.getElementById('rcount').value.trim(),m=document.getElementById('rmsg').value.trim(),r=document.getElementById('result');
+ if(!n||!attendance){r.textContent='Silakan isi nama dan pilih kehadiran.';return}
+ if(attendance==='Hadir' && (!c || Number(c)<1)){r.textContent='Silakan isi jumlah tamu yang hadir.';return}
+ const a=getRSVP();a.push({n,c,attendance,m,t:new Date().toISOString()});localStorage.setItem('fd_rsvp',JSON.stringify(a));
+ document.getElementById('rmsg').value='';document.getElementById('rname').value='';document.getElementById('rcount').value='';
+ document.querySelectorAll('.rsvp-btn').forEach(x=>x.classList.remove('selected'));attendance='';
+ r.textContent='Terima kasih, RSVP dan ucapan Anda sudah dicatat.';renderGuestbook();
+ // Setelah RSVP terkirim, auto-scroll langsung berjalan lagi.
+ if(unlocked){clearTimeout(manualTimer);startAuto();}
+}
+renderGuestbook();
+function copyAcc(v,b){
+ const done=()=>{let old=b.textContent;b.textContent='✓ Tersalin';setTimeout(()=>b.textContent=old,1400)};
+ if(navigator.clipboard&&isSecureContext)navigator.clipboard.writeText(v).then(done).catch(()=>fallback(v,done));else fallback(v,done)
+}
+function fallback(v,done){let t=document.createElement('textarea');t.value=v;t.style.position='fixed';t.style.opacity=0;document.body.appendChild(t);t.select();try{document.execCommand('copy');done()}catch(e){}t.remove()}
+// Nama tamu: bisa ditulis persis, termasuk spasi dan tanda &.
+// Contoh: ?to=Bapak Budi  atau  ?to=Dinil & Partner
+const rawSearch=location.search.replace(/^\?/,'');
+function getGuestName(){
+  const m=rawSearch.match(/^(?:to|nama|nama_tamu|guest)=([\s\S]*)$/i);
+  if(m) return decodeURIComponent(m[1].replace(/\+/g,' ')).trim();
+  const q=new URLSearchParams(location.search);
+  return (q.get('to')||q.get('nama')||q.get('nama_tamu')||q.get('guest')||'').trim();
+}
+const guest=getGuestName();
+
+
+
+/* COVER GATE: cover pertama wajib diklik. Setelah klik, masuk ke halaman undangan
+   yang memiliki cover kedua tanpa tombol, lalu auto-scroll menuju Mempelai. */
+const gate=document.getElementById('coverGate');
+const guestCover=document.getElementById('guestCover');
+const innerGuestName=document.getElementById('innerGuestName');
+const openInvite=document.getElementById('openInvite');
+let guestName=getGuestName();
+if(guestName){
+  guestName=guestName.replace(/\s+/g,' ').trim();
+  guestCover.querySelector('.guest-name').textContent=guestName;
+  innerGuestName.textContent=guestName;
+}
+
+let unlocked=false, autoScrolling=false, autoTimer=null, manualTimer=null, scrollFrame=null;
+document.body.classList.add('locked');
+
+const openCover=()=>{
+  if(unlocked)return;
+  // Memulai musik tepat dari gesture klik tombol agar autoplay browser diizinkan.
+  music.volume=.7;
+  const musicPromise=music.play();
+  if(musicPromise) musicPromise.then(()=>{mb.textContent='❚❚'}).catch(()=>{});
+  unlocked=true;
+  gate.classList.add('cover-opening');
+  requestAnimationFrame(()=>gate.classList.add('slide-up'));
+  setTimeout(()=>{
+    gate.classList.add('cover-opened');
+    document.body.classList.remove('locked');
+    document.body.classList.add('unlocked');
+    window.scrollTo(0,0);
+    startAuto();
+  },900);
+};
+openInvite.addEventListener('click',openCover);
+
+const inviteSections=Array.from(document.querySelectorAll('section')).filter(s=>s.id!=='coverGate');
+
+// OUR LOVE STORY dibagi per paragraf/entry. Setiap paragraf mendapat
+// satu titik auto-scroll sendiri agar teks dan fotonya lebih nyaman dibaca.
+function buildAutoStops(){
+  const stops=[];
+  inviteSections.forEach(sec=>{
+    const story=sec.querySelector('.story');
+    if(story){
+      const intro=story.querySelector('.story-intro');
+      if(intro){
+        stops.push({section:sec, top:Math.max(sec.offsetTop, intro.getBoundingClientRect().top + window.scrollY - 70), part:'intro'});
+      }
+      const entries=[...story.querySelectorAll('.story-entry')];
+      entries.forEach((entry,i)=>{
+        const top=Math.max(sec.offsetTop, entry.getBoundingClientRect().top + window.scrollY - Math.min(70,window.innerHeight*.08));
+        stops.push({section:sec, top, part:i+1});
+      });
+    }else{
+      stops.push({section:sec, top:sec.offsetTop, part:1});
+    }
+  });
+  return stops;
+}
+let autoStops=[];
+let autoIndex=-1;
+let autoFinished=false;
+
+function stopAuto(){
+  autoScrolling=false;
+  if(autoTimer){clearTimeout(autoTimer);autoTimer=null;}
+  if(scrollFrame){cancelAnimationFrame(scrollFrame);scrollFrame=null;}
+}
+function slowScrollTo(targetY,duration,onDone){
+  if(scrollFrame)cancelAnimationFrame(scrollFrame);
+  const startY=window.scrollY, delta=targetY-startY, started=performance.now();
+  const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+  const step=now=>{
+    if(!autoScrolling)return;
+    const t=Math.min(1,(now-started)/duration);
+    window.scrollTo(0,startY+delta*ease(t));
+    if(t<1) scrollFrame=requestAnimationFrame(step);
+    else {scrollFrame=null;if(onDone)onDone();}
+  };
+  scrollFrame=requestAnimationFrame(step);
+}
+function currentSectionIndex(){
+  autoStops=buildAutoStops();
+  const y=window.scrollY+Math.min(120,window.innerHeight*.2);
+  let idx=-1;
+  autoStops.forEach((stop,i)=>{if(stop.top<=y)idx=i;});
+  return idx;
+}
+function startAuto(){
+  if(!unlocked || autoFinished)return;
+  stopAuto();
+  autoScrolling=true;
+  autoStops=buildAutoStops();
+  autoIndex=currentSectionIndex();
+  const goNext=()=>{
+    if(!unlocked||!autoScrolling)return;
+    autoIndex++;
+    if(autoIndex>=autoStops.length){
+      // Sudah mencapai halaman penutup. Berhenti di sini dan jangan kembali ke cover.
+      autoFinished=true;
+      stopAuto();
+      return;
+    }
+    const target=autoStops[autoIndex];
+    const distance=Math.abs(target.top-window.scrollY);
+    // Perjalanan Our Love Story kini terpecah menjadi dua bagian sehingga
+    // setiap bagian lebih nyaman dilihat dan foto sempat tampil dengan baik.
+    const duration=Math.max(1800,Math.min(3600,Math.round(distance/0.42)));
+    slowScrollTo(target.top,duration,()=>{autoTimer=setTimeout(goNext,1800);});
+  };
+  autoTimer=setTimeout(goNext,700);
+}
+function manualMode(){
+  if(!unlocked)return;
+  stopAuto();
+  clearTimeout(manualTimer);
+}
+
+// Jangan pernah membuka cover pertama secara otomatis.
+
+// RSVP/form controls: hentikan auto-scroll selama tamu mengetik atau memilih jawaban.
+['rname','rcount','rmsg'].forEach(id=>{
+  const el=document.getElementById(id);
+  ['focus','input','touchstart','pointerdown'].forEach(ev=>{
+    el.addEventListener(ev,()=>{ if(unlocked) stopAuto(); },{passive:true});
+  });
+});
+document.querySelectorAll('.rsvp-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{ if(unlocked) stopAuto(); });
+});
+
+// Selama cover masih menjadi pengunci, halaman tidak boleh digeser.
+window.addEventListener('scroll',()=>{
+  if(!unlocked){ window.scrollTo(0,0); }
+},{passive:true});
+['touchstart','touchmove','wheel','pointerdown'].forEach(ev=>{
+  window.addEventListener(ev,()=>manualMode(),{passive:true});
+});
+
+// Saat jari dilepas, langsung kembali ke auto-scroll tanpa menunggu 5 detik.
+['touchend','touchcancel','pointerup','pointercancel'].forEach(ev=>{
+  window.addEventListener(ev,()=>{
+    if(!unlocked)return;
+    clearTimeout(manualTimer);
+    manualTimer=setTimeout(()=>startAuto(),150);
+  },{passive:true});
+});
+
+
+// Animate photos in the Love Story timeline.
+const storyPhotos=document.querySelectorAll('.story-photo');
+if('IntersectionObserver' in window){
+  const storyPhotoObserver=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){entry.target.classList.add('visible');}
+    });
+  },{threshold:.2});
+  storyPhotos.forEach(img=>storyPhotoObserver.observe(img));
+}else{storyPhotos.forEach(img=>img.classList.add('visible'));}
+</script>
+
+<script id="ari-data-bridge">
+(function(){
+  function apply(d){
+    if(!d)return;
+    const q=(s)=>document.querySelector(s);
+    const bride=d.bride||'Dian', groom=d.groom||'Faisal';
+    const names=document.querySelectorAll('#mempelai .caption h2, .ampersand-section .caption h2');
+    if(names[0])names[0].textContent=bride;
+    if(names[1])names[1].textContent=groom;
+    const tn=q('.thankyou-names'); if(tn)tn.textContent=groom+' & '+bride;
+    document.title=groom+' & '+bride+' — Wedding Invitation';
+    document.querySelectorAll('.guest-name').forEach(x=>x.textContent=d.guest||'Tamu Undangan');
+    const events=document.querySelectorAll('#acara .event');
+    const date=d.date?new Date(d.date+'T00:00:00').toLocaleDateString('id-ID',{weekday:'long',day:'2-digit',month:'long',year:'numeric'}):'';
+    events.forEach(ev=>{
+      const p=ev.querySelector('p'); if(!p)return;
+      const lines=p.innerHTML.split('<br>');
+      if(date)lines[0]=date;
+      if(d.time)lines[1]=d.time;
+      if(d.venue)lines[2]=d.venue;
+      if(d.address)lines.splice(3,99);
+      p.innerHTML=lines.slice(0,3).concat(d.address?d.address.split(',').map(x=>x.trim()):[]).join('<br>');
+      const a=ev.querySelector('a.btn'); if(a&&d.maps)a.href=d.maps;
+    });
+    const imgs=document.querySelectorAll('#mempelai .portrait, .ampersand-section .portrait');
+    if(d.bridePhoto&&imgs[0])imgs[0].src=d.bridePhoto;
+    if(d.groomPhoto&&imgs[1])imgs[1].src=d.groomPhoto;
+  }
+  window.addEventListener('message',e=>{if(e.data&&e.data.type==='ARI_INVITATION_DATA')apply(e.data.data)});
+  try{apply(JSON.parse(localStorage.getItem('ariInvitation')||'null'))}catch(e){}
+})();
+</script>
+</body>
+</html>

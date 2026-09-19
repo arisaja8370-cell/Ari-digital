@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b0705">
+<title>Kirim Undangan — Faisal & Dian</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:#080504;color:#f7e7c8}
+body{font-family:Georgia,"Times New Roman",serif;padding:28px 16px 40px;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;background:url("bg.webp") center/cover no-repeat;filter:blur(7px) brightness(.34);transform:scale(1.06);z-index:-2}
+body:after{content:"";position:fixed;inset:0;background:rgba(7,4,3,.38);z-index:-1}
+.wrap{width:min(100%,620px);margin:0 auto}
+.card{padding:28px 20px 24px;border:1px solid rgba(222,182,116,.35);border-radius:22px;background:linear-gradient(180deg,rgba(20,10,6,.9),rgba(8,4,3,.82));box-shadow:0 18px 55px rgba(0,0,0,.45)}
+.kicker{font:600 10px Arial,sans-serif;letter-spacing:3px;text-transform:uppercase;opacity:.7;text-align:center}
+h1{text-align:center;font-size:36px;font-weight:400;margin:10px 0 6px}
+.sub{text-align:center;font:12px/1.7 Arial,sans-serif;opacity:.7;margin:0 auto 24px;max-width:470px}
+label{display:block;font:600 11px Arial,sans-serif;letter-spacing:1.2px;margin:18px 0 7px}
+input{width:100%;padding:14px 15px;border-radius:12px;border:1px solid rgba(244,215,162,.3);background:rgba(0,0,0,.3);color:#fff;outline:0;font:15px Arial,sans-serif}
+input:focus{border-color:rgba(244,215,162,.72)}
+button{width:100%;min-height:48px;margin-top:14px;border:1px solid rgba(244,215,162,.55);border-radius:999px;background:rgba(25,13,7,.78);color:#f8e6c2;font:700 11px Arial,sans-serif;letter-spacing:1.3px;cursor:pointer}
+button:active{transform:scale(.985)}
+.secondary{margin-top:9px;background:rgba(255,255,255,.035);border-color:rgba(244,215,162,.25)}
+.result{display:none;margin-top:20px;padding:16px;border:1px solid rgba(244,215,162,.2);border-radius:14px;background:rgba(255,255,255,.035)}
+.result.show{display:block}
+.result-title{font:700 10px Arial,sans-serif;letter-spacing:1.5px;text-transform:uppercase;opacity:.7;margin-bottom:8px}
+.link{font:12px/1.6 Arial,sans-serif;word-break:break-all;opacity:.85}
+.msg{margin-top:12px;font:12px/1.65 Arial,sans-serif;white-space:pre-wrap;opacity:.78}
+.note{text-align:center;font:10px/1.7 Arial,sans-serif;opacity:.5;margin:18px 4px 0}
+.home{display:block;text-align:center;color:#f4dba9;text-decoration:none;font:11px Arial,sans-serif;letter-spacing:1px;margin-top:18px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <div class="kicker">Faisal & Dian</div>
+    <h1>Kirim Undangan</h1>
+    <p class="sub">Ketik nama tamu persis seperti yang ingin ditampilkan pada undangan. Tidak perlu mengubah spasi atau tanda &amp;.</p>
+
+    <label for="guestName">Nama Tamu</label>
+    <input id="guestName" type="text" autocomplete="off" placeholder="Contoh: Bapak Budi / Dinil & Partner">
+
+    <button id="waBtn" type="button">KIRIM VIA WHATSAPP</button>
+    <button id="copyBtn" class="secondary" type="button">SALIN LINK UNDANGAN</button>
+
+    <div id="result" class="result">
+      <div class="result-title">Link personal tamu</div>
+      <div id="link" class="link"></div>
+      <div id="msg" class="msg"></div>
+    </div>
+
+    <div class="note">Halaman ini khusus untuk membuat link dan mengirim undangan. Tamu yang menerima link hanya akan melihat halaman undangan.</div>
+    <a class="home" href="index.html">← Buka halaman undangan</a>
+  </div>
+</div>
+<script>
+const input=document.getElementById('guestName');
+const waBtn=document.getElementById('waBtn');
+const copyBtn=document.getElementById('copyBtn');
+const result=document.getElementById('result');
+const linkEl=document.getElementById('link');
+const msgEl=document.getElementById('msg');
+
+function build(){
+  const name=input.value.replace(/\s+/g,' ').trim();
+  if(!name){alert('Silakan masukkan nama tamu.');input.focus();return null}
+  const inviteUrl=new URL('index.html',location.href);
+  inviteUrl.searchParams.set('to',name);
+  const url=inviteUrl.href;
+  const message=`Kepada Yth. ${name},\n\nKami mengundang saudara/i untuk menghadiri acara pernikahan kami.\n\nFaisal & Dian\n\nSilahkan kunjungi link berikut untuk membuka undangan Anda:\n${url}\n\nAtas kehadiran & doa restu dari saudara, kami ucapkan terimakasih.`;
+  result.classList.add('show');
+  linkEl.textContent=url;
+  msgEl.textContent=message;
+  return {url,message};
+}
+waBtn.onclick=()=>{
+  const data=build();
+  if(!data)return;
+  location.href='https://wa.me/?text='+encodeURIComponent(data.message);
+};
+copyBtn.onclick=async()=>{
+  const data=build();
+  if(!data)return;
+  try{
+    await navigator.clipboard.writeText(data.url);
+    copyBtn.textContent='✓ LINK TERSALIN';
+    setTimeout(()=>copyBtn.textContent='SALIN LINK UNDANGAN',1600);
+  }catch(e){
+    const ta=document.createElement('textarea');ta.value=data.url;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();
+    try{document.execCommand('copy');copyBtn.textContent='✓ LINK TERSALIN';setTimeout(()=>copyBtn.textContent='SALIN LINK UNDANGAN',1600)}catch(err){alert('Link: '+data.url)}
+    ta.remove();
+  }
+};
+input.addEventListener('keydown',e=>{if(e.key==='Enter')waBtn.click()});
+</script>
+</body>
+</html>

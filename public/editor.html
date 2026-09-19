@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Editor — Ari Digital</title><link rel="stylesheet" href="assets/style.css"></head>
+<body><header class="nav"><div class="brand">Ari <span>Digital</span></div><a href="templates.html">← Template</a></header>
+<main class="editor"><aside><p class="eyebrow">EDITOR TEMPLATE 01</p><h1>Isi Undangan</h1>
+<p id="modeNote" class="status">Undangan baru — data akan disimpan ke server saat Anda menekan Simpan.</p>
+<label>Nama Mempelai Wanita<input id="bride" value="Dian"></label>
+<label>Nama Mempelai Pria<input id="groom" value="Faisal"></label>
+<label>Nama Tamu<input id="guest" placeholder="Bapak/Ibu/Saudara/i"></label>
+<label>Tanggal Acara<input id="date" type="date"></label>
+<label>Waktu Acara<input id="time" value="09:00 WIB"></label>
+<label>Lokasi<input id="venue" value="Gedung Pernikahan"></label>
+<label>Alamat<input id="address" value="Jl. Contoh No. 1, Bengkulu"></label>
+<label>Link Google Maps<input id="maps" placeholder="https://maps.google.com/..."></label>
+<label>URL Foto Mempelai Wanita <input id="bridePhoto" placeholder="https://.../foto.jpg"></label>
+<label>URL Foto Mempelai Pria <input id="groomPhoto" placeholder="https://.../foto.jpg"></label>
+<div class="editor-actions"><button class="btn" id="preview">Preview</button><button class="btn" id="save">Simpan Undangan</button><button class="btn ghost" id="publicBtn" disabled>Buka Link Publik</button></div>
+<div id="status" class="status" aria-live="polite">Belum disimpan.</div>
+<p class="muted">Setiap undangan mendapat slug dan token edit sendiri. Pembayaran PRO belum diaktifkan pada tahap ini.</p>
+</aside><section class="phone-wrap"><div class="phone"><iframe id="frame" src="templates/template-01/index.html"></iframe></div></section></main>
+<script>
+const API='/api/invitations';
+const ids=['bride','groom','guest','date','time','venue','address','maps','bridePhoto','groomPhoto'];
+const params=new URLSearchParams(location.search);
+let slug=params.get('slug')||'';
+let editToken=localStorage.getItem('ariEditToken:'+slug)||'';
+const defaults={bride:'Dian',groom:'Faisal',guest:'Tamu Undangan',date:'2026-10-09',time:'09:00 WIB',venue:'Kediaman Mempelai Wanita',address:'Jl. Contoh No. 1, Bengkulu',maps:'',bridePhoto:'',groomPhoto:''};
+
+function collect(){const d={};ids.forEach(id=>d[id]=document.getElementById(id).value.trim());return d}
+function fill(d){ids.forEach(id=>{if(d[id]!==undefined)document.getElementById(id).value=d[id]})}
+function sendPreview(){document.getElementById('frame').contentWindow.postMessage({type:'ARI_INVITATION_DATA',data:collect()},'*')}
+function setStatus(t){document.getElementById('status').textContent=t}
+
+async function load(){
+  if(!slug){fill(defaults); setStatus('Undangan baru — tekan Simpan Undangan untuk membuat link unik.'); return}
+  try{
+    const r=await fetch(API+'?slug='+encodeURIComponent(slug));
+    if(!r.ok) throw new Error('Undangan tidak ditemukan');
+    const j=await r.json(); fill(j.data||{}); editToken=editToken||j.editToken||''; 
+    if(j.editToken) localStorage.setItem('ariEditToken:'+slug,j.editToken);
+    document.getElementById('publicBtn').disabled=false;
+    setStatus('Undangan tersimpan. Slug: '+slug);
+    setTimeout(sendPreview,300);
+  }catch(e){setStatus('Gagal memuat: '+e.message)}
+}
+async function save(){
+  const data=collect();
+  try{
+    let r;
+    if(slug){
+      r=await fetch(API+'?slug='+encodeURIComponent(slug),{method:'PUT',headers:{'Content-Type':'application/json','X-Edit-Token':editToken},body:JSON.stringify({data})});
+    }else{
+      r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({data})});
+    }
+    const j=await r.json();
+    if(!r.ok) throw new Error(j.error||'Gagal menyimpan');
+    slug=j.slug; editToken=j.editToken||editToken; localStorage.setItem('ariEditToken:'+slug,editToken);
+    history.replaceState({},'',location.pathname+'?slug='+encodeURIComponent(slug));
+    document.getElementById('publicBtn').disabled=false;
+    document.getElementById('publicBtn').onclick=()=>location.href='invitation.html?slug='+encodeURIComponent(slug);
+    setStatus('Tersimpan! Link publik: '+location.origin+'/invitation.html?slug='+slug);
+  }catch(e){setStatus('Gagal: '+e.message)}
+  sendPreview();
+}
+document.getElementById('preview').onclick=sendPreview;
+document.getElementById('save').onclick=save;
+document.getElementById('frame').onload=sendPreview;
+document.getElementById('publicBtn').onclick=()=>location.href='invitation.html?slug='+encodeURIComponent(slug);
+load();
+</script></body></html>

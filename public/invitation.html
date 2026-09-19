@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Undangan — Ari Digital</title><link rel="stylesheet" href="assets/style.css"></head>
+<body><div class="public-invite"><div class="public-head">Ari Digital</div><iframe id="invite" src="templates/template-01/index.html"></iframe></div>
+<script>
+(async()=>{
+ const slug=new URLSearchParams(location.search).get('slug');
+ if(!slug){document.title='Undangan tidak ditemukan — Ari Digital';return}
+ try{
+   const r=await fetch('/api/invitations?slug='+encodeURIComponent(slug));
+   if(!r.ok) throw new Error('not found');
+   const j=await r.json();
+   document.title=(j.data.bride||'')+' & '+(j.data.groom||'')+' — Ari Digital';
+   document.getElementById('invite').onload=()=>document.getElementById('invite').contentWindow.postMessage({type:'ARI_INVITATION_DATA',data:j.data||{}},'*');
+ }catch(e){document.body.innerHTML='<main style="padding:40px;font-family:system-ui;text-align:center"><h1>Undangan tidak ditemukan</h1><p>Link mungkin salah atau belum tersimpan.</p></main>'}
+})();
+</script></body></html>
